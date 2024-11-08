@@ -49,28 +49,29 @@ Parameters:
       MaxValue: 16384
       ConstraintDescription: "Must be a valid volume size between 1 and 16384 GiB."
 
-    Mappings:
-      EnvironmentAMI:
-        us-east-1:
-          Prod:
-            AmazonLinux: ami-063d43db0594b521b
-            Ubuntu: ami-063d43db0594b521b
-          Dev:
-            AmazonLinux: ami-063d43db0594b521b
-            Ubuntu: ami-063d43db0594b521b
-          Staging:
-            AmazonLinux: ami-063d43db0594b521b
-            Ubuntu: ami-063d43db0594b521b
-        ap-south-1:
-          Prod:
-            AmazonLinux: ami-063d43db0594b521b
-            Ubuntu: ami-063d43db0594b521b
-          Dev:
-            AmazonLinux: ami-063d43db0594b521b
-            Ubuntu: ami-063d43db0594b521b
-          Staging:
-            AmazonLinux: ami-063d43db0594b521b
-            Ubuntu: ami-063d43db0594b521b
+Mappings:
+  EnvironmentAMI:
+    us-east-1:
+      Prod:
+        AmazonLinux: ami-063d43db0594b521b
+        Ubuntu: ami-063d43db0594b521b
+      Dev:
+        AmazonLinux: ami-063d43db0594b521b
+        Ubuntu: ami-063d43db0594b521b
+      Staging:
+        AmazonLinux: ami-063d43db0594b521b
+        Ubuntu: ami-063d43db0594b521b
+    ap-south-1:
+      Prod:
+        AmazonLinux: ami-063d43db0594b521b
+        Ubuntu: ami-063d43db0594b521b
+      Dev:
+        AmazonLinux: ami-063d43db0594b521b
+        Ubuntu: ami-063d43db0594b521b
+      Staging:
+        AmazonLinux: ami-063d43db0594b521b
+        Ubuntu: ami-063d43db0594b521b
+
 
 Resources:
   EC2Instance:
@@ -78,7 +79,7 @@ Resources:
     Properties: 
       InstanceType: !Ref InstanceType
       ImageId: !FindInMap  [EnvironmentAMI, !Ref Region, !Ref Environment, !Ref OS]
-      AvailabilityZone: !Select [ 0, !GetAZs !Ref Region ]
+      AvailabilityZone: !Select [0, !GetAZs !Ref Region]
       Tags:
         - Key: Name
           Value: !Sub "${Environment}-EC2Instance"
