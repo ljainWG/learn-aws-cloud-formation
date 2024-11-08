@@ -1,5 +1,9 @@
 ---
 template-file-path: ec2-instance-template.yaml
 parameters:
+  Environment: Staging
+  OS: AmazonLinux
+  Region: ap-south-1
+  VolumeSize: 2
   InstanceType: t2.micro
 tags: {}
