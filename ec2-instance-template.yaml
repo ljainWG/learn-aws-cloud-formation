@@ -41,8 +41,8 @@ Parameters:
       - t2.medium
     ConstraintDescription: "Must be a valid EC2 instance type."
 
-    VolumeSize:
-      Description: Size of the EBS volume in GiB
+  VolumeSize:
+    Description: Size of the EBS volume in GiB
       Type: Number
       Default: 10
       MinValue: 1
