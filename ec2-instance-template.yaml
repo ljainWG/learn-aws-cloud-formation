@@ -1,0 +1,29 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Simple CloudFormation template to deploy an EC2 instance
+
+Parameters:
+  InstanceType:
+    Description: EC2 instance type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t2.medium
+    ConstraintDescription: "Must be a valid EC2 instance type."
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties: 
+      InstanceType: !Ref InstanceType
+      ImageId: ami-063d43db0594b521b # This is an Amazon Linux 2023 AMI in the us-east-1 (N.Virginia) region.
+      
+Outputs:
+  InstanceId:
+    Description: ID of the newly created EC2 instance
+    Value: !Ref EC2Instance
+  PublicIP:
+    Description: Public IP address of the EC2 instance
+    Value: !GetAtt EC2Instance.PublicIp

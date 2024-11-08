@@ -1,0 +1,5 @@
+---
+template-file-path: ec2-instance-template.yaml
+parameters:
+  InstanceType: t2.micro
+tags: {}
