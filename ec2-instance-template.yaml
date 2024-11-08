@@ -1,6 +1,5 @@
----
 AWSTemplateFormatVersion: "2010-09-09"
-Description: CloudFormation template to deploy an EC2 instance with an Elastic IP, attached volume, and
+Description: CloudFormation template to deploy an EC2 instance with an Elastic IP and volume, taking various parameters as input
 
 Parameters:
   Environment:
@@ -43,11 +42,11 @@ Parameters:
 
   VolumeSize:
     Description: Size of the EBS volume in GiB
-      Type: Number
-      Default: 10
-      MinValue: 1
-      MaxValue: 16384
-      ConstraintDescription: "Must be a valid volume size between 1 and 16384 GiB."
+    Type: Number
+    Default: 10
+    MinValue: 1
+    MaxValue: 16384
+    ConstraintDescription: "Must be a valid volume size between 1 and 16384 GiB."
 
 Mappings:
   EnvironmentAMI:
@@ -72,13 +71,12 @@ Mappings:
         AmazonLinux: ami-063d43db0594b521b
         Ubuntu: ami-063d43db0594b521b
 
-
 Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties: 
       InstanceType: !Ref InstanceType
-      ImageId: !FindInMap  [EnvironmentAMI, !Ref Region, !Ref Environment, !Ref OS]
+      ImageId: !FindInMap [EnvironmentAMI, !Ref Region, !Ref Environment, !Ref OS]
       AvailabilityZone: !Select [0, !GetAZs !Ref Region]
       Tags:
         - Key: Name
